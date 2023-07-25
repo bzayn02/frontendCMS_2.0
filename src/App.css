@@ -1,3 +1,18 @@
-.main {
+.admin-layout .side-bar {
+  min-width: 230px;
+  position: fixed;
+  height: 100vh;
+}
+.admin-layout .main {
+  width: calc(100vw - 230px);
+  margin-left: 230px;
+}
+
+.admin-layout .page-content {
   min-height: 80vh;
+}
+
+.side-nav-li li {
+  line-height: 3rem;
+  font-weight: 400;
 }
