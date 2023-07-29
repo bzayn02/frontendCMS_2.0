@@ -13,8 +13,16 @@ import Orders from './pages/orders/Orders';
 import Customers from './pages/customers/Customers';
 import AdminUsers from './pages/admin-users/AdminUsers';
 import Profile from './pages/profile/Profile';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCategoriesAction } from './pages/category/categoryAction';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
   return (
     <div className="App">
       <Routes>

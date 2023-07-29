@@ -16,3 +16,7 @@
   line-height: 3rem;
   font-weight: 400;
 }
+
+.main {
+  min-height: 80vh;
+}

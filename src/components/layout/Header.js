@@ -22,6 +22,9 @@ const Header = () => {
               <Link to="/" className="nav-link">
                 Sign In
               </Link>
+              <Link to="/" className="nav-link">
+                Sign Out
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
