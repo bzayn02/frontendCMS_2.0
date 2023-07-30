@@ -3,13 +3,20 @@ import axios from 'axios';
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const adminAPI = rootAPI + '/admin';
 const categoryAPI = rootAPI + '/category';
+const getAccessJWT = () => {
+  return sessionStorage.getItem('accessJWT');
+};
 
-const axiosProcessor = async ({ method, url, obj }) => {
+const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
   try {
+    const headers = {
+      Authorization: isPrivate ? getAccessJWT() : null,
+    };
     const { data } = await axios({
       method,
       url,
       data: obj,
+      headers,
     });
     return data;
   } catch (error) {
@@ -47,6 +54,14 @@ export const postVerifyNewAdminInfo = (data) => {
   };
   return axiosProcessor(obj);
 };
+export const getAdminInfo = () => {
+  const obj = {
+    method: 'get',
+    url: adminAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
 
 // ================== Category API ===================
 
@@ -62,6 +77,7 @@ export const getCategories = () => {
   const obj = {
     method: 'get',
     url: categoryAPI,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
