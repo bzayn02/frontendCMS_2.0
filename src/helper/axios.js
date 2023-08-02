@@ -3,15 +3,26 @@ import axios from 'axios';
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const adminAPI = rootAPI + '/admin';
 const categoryAPI = rootAPI + '/category';
+
 const getAccessJWT = () => {
   return sessionStorage.getItem('accessJWT');
 };
+const getRefreshJWT = () => {
+  return localStorage.getItem('refreshJWT');
+};
 
-const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
+const axiosProcessor = async ({
+  method,
+  url,
+  obj,
+  isPrivate,
+  refreshToken,
+}) => {
+  const token = refreshToken ? getRefreshJWT() : getAccessJWT();
+  const headers = {
+    Authorization: isPrivate ? token : null,
+  };
   try {
-    const headers = {
-      Authorization: isPrivate ? getAccessJWT() : null,
-    };
     const { data } = await axios({
       method,
       url,
@@ -54,11 +65,21 @@ export const postVerifyNewAdminInfo = (data) => {
   };
   return axiosProcessor(obj);
 };
+
 export const getAdminInfo = () => {
   const obj = {
     method: 'get',
     url: adminAPI,
     isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const signoutAdmin = (_id) => {
+  const obj = {
+    method: 'post',
+    url: adminAPI + '/signout',
+    obj: { _id, accessJWT: getAccessJWT(), refreshJWT: getRefreshJWT() },
   };
   return axiosProcessor(obj);
 };
@@ -95,6 +116,18 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: 'delete',
     url: categoryAPI + '/' + _id,
+  };
+  return axiosProcessor(obj);
+};
+
+// ================= Get New AccessJWT =========
+
+export const getNewAccessJWT = () => {
+  const obj = {
+    method: 'get',
+    url: adminAPI + '/get-accessjwt',
+    refreshToken: true,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };

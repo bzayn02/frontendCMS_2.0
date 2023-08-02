@@ -34,12 +34,7 @@ const AdminSignup = () => {
       type: 'text',
       placeholder: 'Address',
     },
-    // {
-    //   label: 'Date of Birth',
-    //   name: 'dob',
-    //   type: 'date',
-    //   placeholder: 'Date of Birth',
-    // },
+
     {
       label: 'Email',
       name: 'email',
@@ -106,7 +101,11 @@ const AdminSignup = () => {
         </Col>
         <Col md="6">
           <div>
-            <img src={signup} alt="" height="700px" width="500px" />
+            <img
+              src={signup}
+              alt=""
+              style={{ height: '45rem', width: '35rem', objectFit: 'contain' }}
+            />
           </div>
         </Col>
       </Row>

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import EditCatForm from './EditCategoryForm';
 import CustomModal from '../customModal/CustomModal';
 import { setModalShow } from '../../system/systemSlice';
+import { getCategoriesAction } from '../../pages/category/categoryAction';
 
 const CategoryTable = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categoryInfo);
   const [selectedCategory, setSelectedCategory] = useState({});
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
 
   const handleOnEdit = (obj) => {
     if (
