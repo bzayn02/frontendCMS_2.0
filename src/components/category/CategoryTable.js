@@ -24,6 +24,15 @@ const CategoryTable = () => {
     }
   };
 
+  const handleOnChange = (e) => {
+    const { value } = e.target;
+    const filteredCategory = categories.filter((item) => {
+      const catName = item.title.toLowerCase();
+      return catName.includes(value.toLowerCase());
+    });
+    console.log(filteredCategory, 'from filtered category');
+  };
+
   return (
     <>
       <CustomModal title="Edit Category">
@@ -32,9 +41,9 @@ const CategoryTable = () => {
       </CustomModal>
 
       <div className="text-end d-flex justify-content-around my-4">
-        <div className="">30 Categories found!</div>
+        <div className="">{30} Categories found!</div>
         <div>
-          <Form.Control />
+          <Form.Control onChange={handleOnChange} />
         </div>
       </div>
       <hr />
@@ -50,6 +59,7 @@ const CategoryTable = () => {
           </tr>
         </thead>
         <tbody>
+          {}
           {categories.map(({ _id, title, slug, createdAt, status }, i) => (
             <tr key={i}>
               <td>{i + 1}</td>

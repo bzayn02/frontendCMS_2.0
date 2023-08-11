@@ -3,6 +3,7 @@ import axios from 'axios';
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const adminAPI = rootAPI + '/admin';
 const categoryAPI = rootAPI + '/category';
+const paymentAPI = rootAPI + '/payment-options';
 
 const getAccessJWT = () => {
   return sessionStorage.getItem('accessJWT');
@@ -31,6 +32,24 @@ const axiosProcessor = async ({
     });
     return data;
   } catch (error) {
+    if (
+      error?.response?.status === 403 &&
+      error?.response?.data?.message === 'jwt expired'
+    ) {
+      // Get new accessJWT
+      const { status, accessJWT } = await getNewAccessJWT();
+      if (status === 'success' && accessJWT) {
+        sessionStorage.setItem('accessJWT', accessJWT);
+      }
+      //
+      return axiosProcessor({
+        method,
+        url,
+        obj,
+        isPrivate,
+        refreshToken,
+      });
+    }
     return {
       status: 'error',
       message: error.response ? error?.response?.data?.message : error.message,
@@ -91,6 +110,7 @@ export const postNewCategory = (data) => {
     method: 'post',
     url: categoryAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -108,6 +128,7 @@ export const updateCategory = (data) => {
     method: 'put',
     url: categoryAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -116,6 +137,7 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: 'delete',
     url: categoryAPI + '/' + _id,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -127,6 +149,45 @@ export const getNewAccessJWT = () => {
     method: 'get',
     url: adminAPI + '/get-accessjwt',
     refreshToken: true,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+// Payment API
+export const postNewPayment = (data) => {
+  const obj = {
+    method: 'post',
+    url: paymentAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const getAllPayments = () => {
+  const obj = {
+    method: 'get',
+    url: paymentAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const updatePaymentOption = (data) => {
+  const obj = {
+    method: 'put',
+    url: paymentAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const deletePaymentOption = (_id) => {
+  const obj = {
+    method: 'delete',
+    url: paymentAPI + '/' + _id,
     isPrivate: true,
   };
   return axiosProcessor(obj);
