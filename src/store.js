@@ -3,6 +3,7 @@ import categoryReducer from './pages/category/categorySlice';
 import systemReducer from './system/systemSlice';
 import adminReducer from './pages/signin-signup/adminSlice';
 import paymentReducer from './pages/payment-options/paymentSlice';
+import productReducer from './pages/products/productSlice';
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     systemInfo: systemReducer,
     adminInfo: adminReducer,
     paymentInfo: paymentReducer,
+    productInfo: productReducer,
   },
 });

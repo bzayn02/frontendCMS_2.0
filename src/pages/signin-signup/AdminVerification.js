@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import { Alert, Container, Spinner } from 'react-bootstrap';
@@ -9,10 +9,8 @@ import { toast } from 'react-toastify';
 const AdminVerification = () => {
   const navigate = useNavigate();
   const [queryStrings] = useSearchParams();
-  console.log(queryStrings);
   const code = queryStrings.get('code');
   const email = queryStrings.get('email');
-  console.log(code, email);
 
   const [showSpinner, setShowSpinner] = useState(true);
   const [response, setResponse] = useState({});

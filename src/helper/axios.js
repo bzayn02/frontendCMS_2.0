@@ -4,6 +4,7 @@ const rootAPI = process.env.REACT_APP_ROOTAPI;
 const adminAPI = rootAPI + '/admin';
 const categoryAPI = rootAPI + '/category';
 const paymentAPI = rootAPI + '/payment-options';
+const productAPI = rootAPI + '/products';
 
 const getAccessJWT = () => {
   return sessionStorage.getItem('accessJWT');
@@ -114,6 +115,7 @@ export const postNewCategory = (data) => {
   };
   return axiosProcessor(obj);
 };
+
 export const getCategories = () => {
   const obj = {
     method: 'get',
@@ -188,6 +190,42 @@ export const deletePaymentOption = (_id) => {
   const obj = {
     method: 'delete',
     url: paymentAPI + '/' + _id,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+// =========== Product =======
+export const postNewProduct = (data) => {
+  const obj = {
+    method: 'post',
+    url: productAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const updateProduct = (data) => {
+  const obj = {
+    method: 'put',
+    url: productAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const getProducts = (_id) => {
+  const obj = {
+    method: 'get',
+    url: _id ? productAPI + '/' + _id : productAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const deleteProduct = (_id) => {
+  const obj = {
+    method: 'delete',
+    url: productAPI + '/' + _id,
     isPrivate: true,
   };
   return axiosProcessor(obj);

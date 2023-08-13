@@ -17,7 +17,6 @@ const NewPayment = () => {
     if (name === 'status') {
       value = checked ? 'active' : 'inactive';
     }
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 

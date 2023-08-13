@@ -13,7 +13,6 @@ const initialState = {
 
 const Signin = () => {
   const location = useLocation();
-  console.log(location);
   const { admin } = useSelector((state) => state.adminInfo);
   const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
@@ -33,7 +32,6 @@ const Signin = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     dispatch(signInAdminAction(form));
   };
   return (

@@ -72,7 +72,6 @@ const AdminSignup = () => {
     if (confirmPassword !== rest.password) {
       return toast.error('Password should match.');
     }
-    console.log(form);
 
     createNewAdminAction(rest);
   };
