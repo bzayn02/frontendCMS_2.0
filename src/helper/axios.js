@@ -230,3 +230,23 @@ export const deleteProduct = (_id) => {
   };
   return axiosProcessor(obj);
 };
+
+// ======== Resetting Password ============
+
+export const requestPassOTP = (email) => {
+  const obj = {
+    method: 'post',
+    url: adminAPI + '/request-otp',
+    obj: { email },
+  };
+  return axiosProcessor(obj);
+};
+export const resetPassword = (data) => {
+  // data = {email, password, otp}
+  const obj = {
+    method: 'post',
+    url: adminAPI + '/reset-password',
+    obj: data,
+  };
+  return axiosProcessor(obj);
+};

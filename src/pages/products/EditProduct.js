@@ -15,7 +15,6 @@ const initialState = {
 const EditProduct = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
-  console.log(_id);
   const dispatch = useDispatch();
 
   const [form, setForm] = useState(initialState);
@@ -155,7 +154,7 @@ const EditProduct = () => {
 
     rest.images = rest.images.filter((url) => !imgToDelete.includes(url));
 
-    // set all form data in FormData
+    // set all rest data in FormData
     for (let key in rest) {
       formData.append(key, rest[key]);
     }

@@ -72,7 +72,7 @@ const Signin = () => {
               </div>
               <p className="mt-2 text-end">
                 Forgot Password? Click{' '}
-                <Link to="reset-pass-otp" className="">
+                <Link to="reset-password" className="">
                   here
                 </Link>{' '}
                 to reset.
