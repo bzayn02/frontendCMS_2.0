@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import {
   getAdminInfo,
+  getAllAdmins,
   getNewAccessJWT,
   postNewAdmin,
   signInAdmin,
@@ -17,6 +18,14 @@ export const createNewAdminAction = async (obj) => {
   const { status, message } = await pendingResponse;
   toast[status](message);
 };
+
+// export const getAllAdminsAction = (obj)=>async dispatch=>{
+//   const {status}=await getAllAdmins();
+//   if(status==="success"){
+
+//   }
+// }
+
 export const updateAdminAction = (obj) => async (dispatch) => {
   const pendingResponse = updateAdmin(obj);
   toast.promise(pendingResponse, {
