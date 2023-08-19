@@ -20,12 +20,14 @@ import PrivateRoute from './components/private/PrivateRoute';
 import NewProduct from './pages/products/NewProduct';
 import EditProduct from './pages/products/EditProduct';
 import ResetPassword from './pages/signin-signup/ResetPassword';
+import { getAdminProfileAction } from './pages/signin-signup/adminAction';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategoriesAction());
+    dispatch(getAdminProfileAction());
   }, [dispatch]);
   return (
     <div className="App">
@@ -118,7 +120,7 @@ function App() {
           }
         />
         <Route
-          path="profile"
+          path="admin/update-profile"
           element={
             <PrivateRoute>
               <Profile />

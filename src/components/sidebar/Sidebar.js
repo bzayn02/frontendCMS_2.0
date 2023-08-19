@@ -54,7 +54,7 @@ const Sidebar = () => {
           </li>
           <hr />
           <li>
-            <Link className="nav-link" to="/profile">
+            <Link className="nav-link" to="/admin/update-profile">
               <CgProfile /> Profile
             </Link>
           </li>

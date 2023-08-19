@@ -4,11 +4,21 @@ import {
   getNewAccessJWT,
   postNewAdmin,
   signInAdmin,
+  updateAdmin,
 } from '../../helper/axios';
 import { setAdmin } from './adminSlice';
 
 export const createNewAdminAction = async (obj) => {
   const pendingResponse = postNewAdmin(obj);
+  toast.promise(pendingResponse, {
+    pending: 'Please wait',
+  });
+
+  const { status, message } = await pendingResponse;
+  toast[status](message);
+};
+export const updateAdminAction = (obj) => async (dispatch) => {
+  const pendingResponse = updateAdmin(obj);
   toast.promise(pendingResponse, {
     pending: 'Please wait',
   });

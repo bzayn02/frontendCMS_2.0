@@ -65,6 +65,16 @@ export const postNewAdmin = (data) => {
     method: 'post',
     url: adminAPI,
     obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const updateAdmin = (data) => {
+  const obj = {
+    method: 'put',
+    url: adminAPI + '/update-profile',
+    obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
