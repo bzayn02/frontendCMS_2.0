@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,17 +10,34 @@ import { Link } from 'react-router-dom';
 const ProductTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productInfo);
+  const [displayList, setDisplayList] = useState([]);
 
   useEffect(() => {
     dispatch(getProductsAction());
   }, [dispatch]);
+
+  useEffect(() => {
+    setDisplayList(products);
+  }, [products]);
+
+  const handleOnSearch = (e) => {
+    const { value } = e.target;
+    const filteredProducts = products.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setDisplayList(filteredProducts);
+  };
   return (
     <div>
       <div className="mt-5">
-        <div className="d-flex justify-content-between mb-3">
-          <div className="">{products.length} Products found</div>
+        <div className="text-end d-flex justify-content-around my-4">
+          <div className="">{displayList.length} Products found</div>
           <div className="">
-            <Form.Control type="text" placeholder="Search by Product Name..." />
+            <Form.Control
+              type="text"
+              placeholder="Search by Product Name..."
+              onChange={handleOnSearch}
+            />
           </div>
         </div>
         <Table striped bordered hover className="text-start">
@@ -35,7 +52,7 @@ const ProductTable = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((item, i) => (
+            {displayList.map((item, i) => (
               <tr key={item._id}>
                 <td>{i + 1}</td>
                 <td>

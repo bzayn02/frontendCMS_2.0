@@ -7,6 +7,7 @@ import { setModalShow } from '../../system/systemSlice';
 import { getCategoriesAction } from '../../pages/category/categoryAction';
 
 const CategoryTable = () => {
+  const [displayList, setDisplayList] = useState([]);
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categoryInfo);
   const [selectedCategory, setSelectedCategory] = useState({});
@@ -14,6 +15,10 @@ const CategoryTable = () => {
   useEffect(() => {
     dispatch(getCategoriesAction());
   }, [dispatch]);
+
+  useEffect(() => {
+    setDisplayList(categories);
+  }, [categories]);
 
   const handleOnEdit = (obj) => {
     if (
@@ -24,13 +29,12 @@ const CategoryTable = () => {
     }
   };
 
-  const handleOnChange = (e) => {
+  const handleOnSearch = (e) => {
     const { value } = e.target;
-    const filteredCategory = categories.filter((item) => {
-      const catName = item.title.toLowerCase();
-      return catName.includes(value.toLowerCase());
-    });
-    console.log(filteredCategory, 'from filtered category');
+    const filteredCategories = categories.filter((item) =>
+      item.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setDisplayList(filteredCategories);
   };
 
   return (
@@ -41,9 +45,9 @@ const CategoryTable = () => {
       </CustomModal>
 
       <div className="text-end d-flex justify-content-around my-4">
-        <div className="">{30} Categories found!</div>
+        <div className="">{displayList.length} Categories found!</div>
         <div>
-          <Form.Control onChange={handleOnChange} />
+          <Form.Control onChange={handleOnSearch} />
         </div>
       </div>
       <hr />
@@ -60,7 +64,7 @@ const CategoryTable = () => {
         </thead>
         <tbody>
           {}
-          {categories.map(({ _id, title, slug, createdAt, status }, i) => (
+          {displayList.map(({ _id, title, slug, createdAt, status }, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
               <td
