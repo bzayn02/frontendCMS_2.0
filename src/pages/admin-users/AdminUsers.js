@@ -33,20 +33,39 @@ const AdminUsers = () => {
           <thead>
             <tr>
               <th>#</th>
+              <th>Status</th>
               <th>Name</th>
               <th>Email</th>
               <th>Contact</th>
               <th>Address</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
             {admins.map((item, i) => (
               <tr key={i}>
                 <td>{i + 1}</td>
+                <td
+                  className={
+                    item?.status === 'active' ? 'text-success' : 'text-primary'
+                  }
+                >
+                  {item?.status}
+                </td>
                 <td>{item?.fname + ' ' + item?.lname}</td>
                 <td>{item?.email}</td>
                 <td>{item?.phone}</td>
                 <td>{item?.address}</td>
+                <td>
+                  <Link to="/admin/update-profile">
+                    <Button
+                      disabled={item?.status === 'inactive'}
+                      variant="dark"
+                    >
+                      Edit
+                    </Button>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
