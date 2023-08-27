@@ -57,7 +57,13 @@ const AdminUsers = () => {
                 <td>{item?.phone}</td>
                 <td>{item?.address}</td>
                 <td>
-                  <Link to="/admin/update-profile">
+                  <Link
+                    to={
+                      item?.status === 'inactive'
+                        ? '#'
+                        : '/admin/update-profile'
+                    }
+                  >
                     <Button
                       disabled={item?.status === 'inactive'}
                       variant="dark"
