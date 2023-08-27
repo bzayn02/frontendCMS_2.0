@@ -21,6 +21,9 @@ import NewProduct from './pages/products/NewProduct';
 import EditProduct from './pages/products/EditProduct';
 import ResetPassword from './pages/signin-signup/ResetPassword';
 import { getAdminProfileAction } from './pages/signin-signup/adminAction';
+import { getAllAdminsAction } from './pages/admin-users/allAdminAction';
+import { getProductsAction } from './pages/products/productAction';
+import { getAllPaymentsAction } from './pages/payment-options/paymentAction';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +31,9 @@ function App() {
   useEffect(() => {
     dispatch(getCategoriesAction());
     dispatch(getAdminProfileAction());
+    dispatch(getAllAdminsAction());
+    dispatch(getProductsAction());
+    dispatch(getAllPaymentsAction());
   }, [dispatch]);
   return (
     <div className="App">

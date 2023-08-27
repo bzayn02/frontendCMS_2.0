@@ -29,7 +29,7 @@ const PaymentOptionsTable = () => {
       <CustomModal title="Edit Payment Option">
         <EditPaymentOptionForm paymentOption={selectedPaymentOption} />
       </CustomModal>
-      <Table striped bordered hover>
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>#</th>

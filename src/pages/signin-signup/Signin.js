@@ -36,7 +36,7 @@ const Signin = () => {
   };
   return (
     <Layout>
-      <main className="main pt-5 my-5">
+      <main className="main pt-5">
         <Row className="d-flex justify-content-evenly">
           {' '}
           <Col className=" d-flex justify-content-center align-items-center">
@@ -72,7 +72,7 @@ const Signin = () => {
               </div>
               <p className="mt-2 text-end">
                 Forgot Password? Click{' '}
-                <Link to="reset-password" className="">
+                <Link to="reset-password" className=" text-white-50">
                   here
                 </Link>{' '}
                 to reset.

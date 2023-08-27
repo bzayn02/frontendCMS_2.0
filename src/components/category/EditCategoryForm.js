@@ -38,7 +38,10 @@ const EditCatForm = ({ category }) => {
 
   return (
     <>
-      <Form onSubmit={handleOnSubmit} className="p-4 rounded">
+      <Form
+        onSubmit={handleOnSubmit}
+        className="m-auto border p-4 shadow-lg my-2 rounded-4"
+      >
         <Form.Group className="p-1">
           {' '}
           <Form.Check

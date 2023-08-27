@@ -99,7 +99,7 @@ const AdminSignup = () => {
           </Form>
         </Col>
         <Col md="6">
-          <div>
+          <div className="md-d-none">
             <img
               src={signup}
               alt=""

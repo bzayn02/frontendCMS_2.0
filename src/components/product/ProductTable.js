@@ -40,7 +40,7 @@ const ProductTable = () => {
             />
           </div>
         </div>
-        <Table striped bordered hover className="text-start">
+        <Table striped bordered hover className="text-start" variant="dark">
           <thead>
             <tr>
               <th>#</th>

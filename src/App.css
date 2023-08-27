@@ -19,6 +19,8 @@
 
 .main {
   min-height: 80vh;
+  background-color: #095f80;
+  color: white;
 }
 
 .reset-pass form {
@@ -30,5 +32,4 @@
 }
 
 .page-content {
-  background-color: #fefbea;
 }
